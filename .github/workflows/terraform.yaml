@@ -6,6 +6,9 @@ on:
       - synchronize
     branches: 
       - main
+permissions:
+  id-token: write
+  contents: read
 jobs:
   terraform:
     name: plan
