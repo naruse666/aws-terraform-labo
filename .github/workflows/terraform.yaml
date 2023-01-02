@@ -17,7 +17,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
       - name: configure AWS
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v1-node16
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ap-northeast-1
