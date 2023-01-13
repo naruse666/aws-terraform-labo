@@ -13,6 +13,10 @@ jobs:
   terraform:
     name: plan
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - root_module: env/ecs_on_fargate
     steps:
       - name: checkout
         uses: actions/checkout@v3
