@@ -9,6 +9,7 @@ on:
 permissions:
   id-token: write
   contents: read
+  pull-requests: write
 jobs:
   terraform:
     name: plan
@@ -47,7 +48,7 @@ jobs:
             ## Terraform Init \`${{ steps.init.outcome }}\`
             ## Terraform Validate \`${{ steps.validate.outcome }}\`
             ## Terraform Plan \`${{ steps.plan.outcome }}\``
-            
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
