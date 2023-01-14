@@ -18,6 +18,7 @@ jobs:
       matrix:
         include:
           - root_module: env/ecs_on_fargate
+          - root_module: env/s3_cloudfront_static_website
     steps:
       - name: checkout
         uses: actions/checkout@v3
