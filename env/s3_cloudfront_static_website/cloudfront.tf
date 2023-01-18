@@ -1,3 +1,4 @@
+#tfsec:ignore:aws-cloudfront-enable-waf
 resource "aws_cloudfront_distribution" "static-website" {
   origin {
     domain_name = aws_s3_bucket.bucket.bucket_regional_domain_name

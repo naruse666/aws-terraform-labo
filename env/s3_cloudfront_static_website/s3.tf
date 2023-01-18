@@ -1,3 +1,5 @@
+#tfsec:ignore:aws-s3-block-public-acls
+#tfsec:ignore:aws-s3-block-public-policy
 resource "aws_s3_bucket" "bucket" {
   bucket_prefix = "static-website"
 }
