@@ -57,3 +57,20 @@ jobs:
               repo: context.repo.repo,
               body: output
             })
+  
+  tfsec:
+    name: tfsec
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - root_module: env/ecs_on_fargate
+          - root_module: env/s3_cloudfront_static_website
+          - root_module: env/inspector
+    steps:
+      - uses: actions/checkout@v3
+      - name: tfsec
+        uses: aquasecurity/tfsec-action@v1.0.2
+        with:
+          working_directory: ${{ matrix.root_module }}
+          soft_fail: true # dont break build
