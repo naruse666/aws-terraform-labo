@@ -1,19 +1,19 @@
 variable "name" {
-  type = string
+  type        = string
   description = "alb name"
 }
 
 variable "internal" {
-  type = bool
+  type        = bool
   description = "internal type"
 }
 
 variable "subnets" {
-  type = list
+  type        = list(any)
   description = "subnets list"
 }
 
 variable "security_groups" {
-  type = list
+  type        = list(any)
   description = "security groups"
 }

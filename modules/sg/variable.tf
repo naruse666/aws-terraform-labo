@@ -1,19 +1,19 @@
 variable "name" {
-  type = string
+  type        = string
   description = "sg name"
 }
 
 variable "vpc_id" {
-  type = string
+  type        = string
   description = "vpc id"
 }
 
 variable "port" {
-  type = number
+  type        = number
   description = "port number"
 }
 
 variable "cidr" {
-  type = list
+  type        = list(any)
   description = "cidr block"
 }

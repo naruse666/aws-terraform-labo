@@ -41,15 +41,15 @@ data "aws_iam_policy_document" "static-website" {
 }
 
 resource "aws_s3_object" "index" {
-  bucket = aws_s3_bucket.bucket.id
-  key    = "index.html"
-  source = "index.html"
+  bucket       = aws_s3_bucket.bucket.id
+  key          = "index.html"
+  source       = "index.html"
   content_type = "text/html"
 }
 
 resource "aws_s3_object" "error" {
-  bucket = aws_s3_bucket.bucket.id
-  key    = "error.html"
-  source = "error.html"
+  bucket       = aws_s3_bucket.bucket.id
+  key          = "error.html"
+  source       = "error.html"
   content_type = "text/html"
 }

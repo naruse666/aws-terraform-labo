@@ -1,14 +1,14 @@
 variable "name" {
-  type = string
+  type        = string
   description = "ecs cluster name."
 }
 
 variable "kms_key_id" {
-  type = string
+  type        = string
   description = "ecs cluster log encription"
 }
 
 variable "log_group" {
-  type = string
+  type        = string
   description = "cloudwatch log group"
 }

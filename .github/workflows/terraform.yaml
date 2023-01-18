@@ -19,6 +19,7 @@ jobs:
         include:
           - root_module: env/ecs_on_fargate
           - root_module: env/s3_cloudfront_static_website
+          - root_module: env/inspector
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -46,9 +47,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const output = `## Target env: ${{ matrix.root_module }}
-            ## Terraform Init \`${{ steps.init.outcome }}\`
-            ## Terraform Validate \`${{ steps.validate.outcome }}\`
-            ## Terraform Plan \`${{ steps.plan.outcome }}\``
+            ### Terraform Init \`${{ steps.init.outcome }}\`
+            ### Terraform Validate \`${{ steps.validate.outcome }}\`
+            ### Terraform Plan \`${{ steps.plan.outcome }}\``
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,

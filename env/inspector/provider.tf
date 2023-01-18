@@ -7,7 +7,7 @@ terraform {
   }
   backend "s3" {
     bucket = "naruse-tf-backend"
-    key    = "aws-labo/test.tfstate"
+    key    = "aws-labo/inspector.tfstate"
     region = "ap-northeast-1"
   }
 }
