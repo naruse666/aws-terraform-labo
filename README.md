@@ -7,6 +7,10 @@ awsの各サービスの練習や検証用のリポジトリ。(terraformの練�
 よく見る構成の復習や業務で気になったことを検証するサンドボックス的運用を行う。コスト削減のため、使い終わったら```terraform destroy```を実行。  
 PR作成時に```terraform plan```を実行してデグレーションを検査。(applyはしない。)
 
+# バックエンド
+terragruntを使用。
+```terragrunt init```でバックエンドを作成。[公式](https://terragrunt.gruntwork.io/).
+
 # ファイル階層
 無難な感じで。
 ```
