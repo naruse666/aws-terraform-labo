@@ -9,6 +9,7 @@ terraform {
     bucket = "naruse-tf-backend"
     key    = "aws-labo/inspector.tfstate"
     region = "ap-northeast-1"
+    dynamodb_table = "naruse-tf-backend"
   }
 }
 

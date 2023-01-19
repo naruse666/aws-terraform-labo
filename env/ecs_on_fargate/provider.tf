@@ -9,6 +9,7 @@ terraform {
     bucket = "naruse-tf-backend"
     key    = "aws-labo/ecs_on_fargate.tfstate"
     region = "ap-northeast-1"
+    dynamodb_table = "naruse-tf-backend"
   }
 }
 
