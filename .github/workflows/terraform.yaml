@@ -20,6 +20,7 @@ jobs:
           - root_module: env/ecs_on_fargate
           - root_module: env/s3_cloudfront_static_website
           - root_module: env/inspector
+          - root_module: env/waf
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -40,16 +41,24 @@ jobs:
         run: terraform validate -no-color
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color
+        run: terraform plan -no-color -lock=false
         continue-on-error: true
       - uses: actions/github-script@v6
+        env:
+          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const output = `## Target env: ${{ matrix.root_module }}
             ### Terraform Init \`${{ steps.init.outcome }}\`
             ### Terraform Validate \`${{ steps.validate.outcome }}\`
-            ### Terraform Plan \`${{ steps.plan.outcome }}\``
+            ### Terraform Plan \`${{ steps.plan.outcome }}\`
+
+            <details><summary>Show Plan</summary>
+
+            \`\`\`${process.env.PLAN}\`\`\`
+
+            </details>`
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,
@@ -67,6 +76,7 @@ jobs:
           - root_module: env/ecs_on_fargate
           - root_module: env/s3_cloudfront_static_website
           - root_module: env/inspector
+          - root_module: env/waf
     steps:
       - uses: actions/checkout@v3
       - name: tfsec
