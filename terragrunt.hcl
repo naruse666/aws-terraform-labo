@@ -8,7 +8,7 @@ remote_state {
     bucket         = "naruse-tf-backend"
     key            = "aws-labo/${path_relative_to_include()}.tfstate"
     region         = "ap-northeast-1"
-    encrypt = true
+    encrypt        = true
     dynamodb_table = "naruse-tf-backend"
   }
 }
@@ -26,7 +26,7 @@ EOF
 generate "versions" {
   path      = "versions_override.tf"
   if_exists = "overwrite_terragrunt"
-  contents = <<EOF
+  contents  = <<EOF
 terraform {
   required_providers {
     aws = {

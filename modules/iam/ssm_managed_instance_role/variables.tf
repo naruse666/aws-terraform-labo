@@ -1,9 +1,9 @@
 variable "name" {
-  type = string
+  type        = string
   description = "instance profile name"
 }
 
 variable "service_name" {
-  type = string
-  description = "assume role service name" 
+  type        = string
+  description = "assume role service name"
 }

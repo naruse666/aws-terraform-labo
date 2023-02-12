@@ -1,5 +1,5 @@
 module "kinesis_role" {
-  source = "../../modules/iam/sts_role"
+  source       = "../../modules/iam/sts_role"
   name         = "kinesis_role"
   service_name = "firehose.amazonaws.com"
 }
