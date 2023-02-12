@@ -1,22 +1,22 @@
 module "ecs" {
   source     = "../../modules/ecs"
-  name       = "ecs-on-fargate"
+  name       = local.name
   kms_key_id = aws_kms_key.ecs.arn
   log_group  = aws_cloudwatch_log_group.ecs.name
 }
 
 module "ecs-sg" {
   source = "../../modules/sg"
-  name   = "test-ecs-sg"
+  name   = "${local.name}-sg"
   vpc_id = module.vpc.vpc_id
   port   = 80
   cidr   = ["0.0.0.0/0"]
 }
 
-resource "aws_ecs_service" "test" {
-  name             = "test-task"
+resource "aws_ecs_service" "service" {
+  name             = "${local.name}-service"
   cluster          = module.ecs.id
-  task_definition  = aws_ecs_task_definition.test.arn
+  task_definition  = aws_ecs_task_definition.task.arn
   desired_count    = 1
   launch_type      = "FARGATE"
   platform_version = "1.4.0"
@@ -27,8 +27,8 @@ resource "aws_ecs_service" "test" {
   }
 }
 
-resource "aws_ecs_task_definition" "test" {
-  family                   = "test-task"
+resource "aws_ecs_task_definition" "task" {
+  family                   = "${local.name}-task"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = 256
@@ -42,5 +42,5 @@ resource "aws_kms_key" "ecs" {
 }
 
 resource "aws_cloudwatch_log_group" "ecs" {
-  name = "ecs-log"
+  name = "${local.name}-log-group"
 }

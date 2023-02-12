@@ -1,9 +1,9 @@
 variable "name" {
   type        = string
-  description = "iam role name"
+  description = "instance profile name"
 }
 
 variable "service_name" {
   type        = string
-  description = "name to assume role"
+  description = "assume role service name"
 }
