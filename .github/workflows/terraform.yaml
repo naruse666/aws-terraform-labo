@@ -19,7 +19,8 @@ jobs:
         include:
           - root_module: env/ecs_on_fargate
           - root_module: env/s3_cloudfront_static_website
-          - root_module: env/inspector
+          - root_module: env/inspector/ec2
+          - root_module: env/inspector/lambda
           - root_module: env/waf
     steps:
       - name: checkout
@@ -36,13 +37,16 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init
+        working-directory: ${{ matrix.root_module }}
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
+        working-directory: ${{ matrix.root_module }}
       - name: Terraform Plan
         id: plan
         run: terraform plan -no-color -lock=false
         continue-on-error: true
+        working-directory: ${{ matrix.root_module }}
       - uses: actions/github-script@v6
         env:
           PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
@@ -75,7 +79,8 @@ jobs:
         include:
           - root_module: env/ecs_on_fargate
           - root_module: env/s3_cloudfront_static_website
-          - root_module: env/inspector
+          - root_module: env/inspector/ec2
+          - root_module: env/inspector/lambda
           - root_module: env/waf
     steps:
       - uses: actions/checkout@v3

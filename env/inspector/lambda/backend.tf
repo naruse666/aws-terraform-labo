@@ -4,7 +4,7 @@ terraform {
     bucket         = "naruse-tf-backend"
     dynamodb_table = "naruse-tf-backend"
     encrypt        = true
-    key            = "aws-labo/env/inspector.tfstate"
+    key            = "aws-labo/env/inspector/lambda.tfstate"
     region         = "ap-northeast-1"
   }
 }
