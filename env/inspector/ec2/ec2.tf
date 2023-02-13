@@ -8,5 +8,5 @@ resource "aws_instance" "web" {
 }
 
 module "ssm_role" {
-  source = "../../modules/iam/ssm_managed_instance_role"
+  source = "../../../modules/iam/ssm_managed_instance_role"
 }

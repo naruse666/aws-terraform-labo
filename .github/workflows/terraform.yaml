@@ -19,7 +19,8 @@ jobs:
         include:
           - root_module: env/ecs_on_fargate
           - root_module: env/s3_cloudfront_static_website
-          - root_module: env/inspector
+          - root_module: env/inspector/ec2
+          - root_module: env/inspector/lambda
           - root_module: env/waf
     steps:
       - name: checkout
@@ -75,7 +76,8 @@ jobs:
         include:
           - root_module: env/ecs_on_fargate
           - root_module: env/s3_cloudfront_static_website
-          - root_module: env/inspector
+          - root_module: env/inspector/ec2
+          - root_module: env/inspector/lambda
           - root_module: env/waf
     steps:
       - uses: actions/checkout@v3
