@@ -22,6 +22,7 @@ jobs:
           - root_module: env/inspector/ec2
           - root_module: env/inspector/lambda
           - root_module: env/waf
+          - root_module: env/managed_grafana
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -82,6 +83,7 @@ jobs:
           - root_module: env/inspector/ec2
           - root_module: env/inspector/lambda
           - root_module: env/waf
+          - root_module: env/managed_grafana
     steps:
       - uses: actions/checkout@v3
       - name: tfsec
