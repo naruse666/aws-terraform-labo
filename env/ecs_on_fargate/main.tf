@@ -18,12 +18,22 @@ resource "aws_ecs_service" "service" {
   cluster          = module.ecs.id
   task_definition  = aws_ecs_task_definition.task.arn
   desired_count    = 1
-  launch_type      = "FARGATE"
   platform_version = "1.4.0"
   network_configuration {
     assign_public_ip = true
     subnets          = module.vpc.public_subnets
     security_groups  = [module.ecs-sg.id]
+  }
+
+  capacity_provider_strategy {
+    capacity_provider = "FARGATE"
+    base              = 0
+    weight            = 0
+  }
+  capacity_provider_strategy {
+    capacity_provider = "FARGATE_SPOT"
+    base              = 0
+    weight            = 100
   }
 }
 
