@@ -8,11 +8,11 @@ import (
 	"time"
 
 	"github.com/aws/aws-lambda-go/lambda"
-	//	"github.com/aws/aws-lambda-go/lambdacontext"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/ecs"
 )
 
+// 対象のクラスタ名
 const TARGET_CLUSTER = "ecs-on-fargate"
 
 type LogLevel string
@@ -24,6 +24,7 @@ const (
 	ERROR LogLevel = "ERROR"
 )
 
+// タスク数
 const (
 	INVALID       int32 = -1
 	SERVICE_START int32 = 1
@@ -36,8 +37,8 @@ func Logger(logLevel LogLevel, message interface{}) {
 	fmt.Printf("%s [%s] %v\n", nowTime, logLevel, message)
 }
 
+// ECSの対象のクラスタのserviceを取得し順番に更新
 func EcsTaskHander(desired int32) {
-	// セッションを作成
 	cfg, err := config.LoadDefaultConfig(context.Background())
 	if err != nil {
 		Logger(ERROR, err)
@@ -50,7 +51,7 @@ func EcsTaskHander(desired int32) {
 	// ECSサービスを列挙
 	svc := ecs.NewFromConfig(cfg)
 	resp, err := svc.ListServices(context.Background(), &ecs.ListServicesInput{
-		Cluster: &clusterName, // クラスター名を指定します。
+		Cluster: &clusterName, 
 	})
 	if err != nil {
 		Logger(ERROR, err)
@@ -69,6 +70,7 @@ func EcsTaskHander(desired int32) {
 	}
 }
 
+// EventBridgeによって呼び出された入力値からdesiredを決定
 func GetDesired(status interface{}) (int32 , error) {
 	if status == "start" {
 		return SERVICE_START, nil
@@ -79,6 +81,7 @@ func GetDesired(status interface{}) (int32 , error) {
 	}
 }
 
+// メインロジック
 func HandleRequest(ctx context.Context, event map[string]interface{}) {
 	// EventBridgeによって呼び出された入力値からdesiredを決定
 	desired, err := GetDesired(event["status"])
@@ -90,6 +93,7 @@ func HandleRequest(ctx context.Context, event map[string]interface{}) {
 	EcsTaskHander(desired)
 }
 
+// lambda関数の呼び出し
 func main() {
 	lambda.Start(HandleRequest)
 }
