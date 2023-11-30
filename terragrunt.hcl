@@ -29,10 +29,7 @@ generate "versions" {
   contents  = <<EOF
 terraform {
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.0"
-    }
+    aws = "~> 5.0"
   }
 }
 EOF
